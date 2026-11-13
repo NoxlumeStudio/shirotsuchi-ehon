@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ja">
+<head>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+ <meta name="theme-color" content="#102c37">
+ <meta name="description" content="『しろつち』全28ページ。湖の村とリオ、しろつち、モーラの物語を体験するデジタル絵本。">
+ <title>しろつち — 息づく絵本</title>
+ <style>
+  html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#0b202b}
+  #frame-host{position:fixed;inset:0;overflow:hidden;background:#0b202b}
+  #story-frame{position:absolute;left:0;top:0;border:0;display:block;width:1600px;height:900px;transform-origin:top left;background:#0b202b}
+  #fallback{position:absolute;inset:auto 16px 16px;z-index:2;display:none;color:#f5f0df;font:14px/1.5 sans-serif;text-align:center}
+  #fallback a{color:inherit}
+  #reader-panel[hidden]{display:none}
+  #reader-panel{position:fixed;inset:0;z-index:10;display:grid;place-items:center;padding:max(16px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) max(16px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left));box-sizing:border-box;background:rgba(5,18,29,.82);backdrop-filter:blur(8px)}
+  .reader-sheet{display:flex;flex-direction:column;box-sizing:border-box;width:min(940px,100%);max-height:100%;min-height:0;overflow:hidden;border:1px solid #d8d9c577;border-radius:18px;background:#142e3a;color:#f3f1e6;box-shadow:0 20px 70px #0008;font-family:'Noto Serif JP',serif}
+  .reader-bar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:clamp(12px,2vw,22px);border-bottom:1px solid #e4e5d233}
+  .reader-bar strong{font-size:clamp(16px,1.8vw,24px);font-weight:400;letter-spacing:.12em}
+  .reader-actions{display:flex;align-items:center;flex-wrap:wrap;gap:8px}
+  .reader-actions button{border:1px solid #e4e5d288;border-radius:100px;background:#183a4b;color:#f7f3e9;min-width:44px;min-height:44px;padding:8px 16px;font:inherit;font-size:clamp(14px,1.2vw,18px);cursor:pointer}
+  .reader-actions button:disabled{opacity:.35;cursor:default}
+  .reader-actions button:focus-visible{outline:3px solid #fae5aa;outline-offset:3px}
+  #reader-text{margin:0;min-height:0;overflow-y:auto;overscroll-behavior:contain;white-space:pre-wrap;overflow-wrap:anywhere;padding:clamp(20px,4vw,42px);font-size:clamp(20px,2.5vw,34px);line-height:1.9;letter-spacing:.035em;scrollbar-color:#e4e5d288 transparent}
+  @media(max-width:600px){.reader-bar{align-items:flex-start}.reader-actions{width:100%;justify-content:space-between}#reader-text{font-size:clamp(19px,4.5vw,26px);line-height:1.75}}
+ </style>
+</head>
+<body>
+ <main id="frame-host" aria-label="しろつち — 息づく絵本">
+  <iframe id="story-frame" src="game.html" title="しろつち — 息づく絵本" allow="autoplay; fullscreen"></iframe>
+  <div id="fallback"><a href="game.html">絵本を直接開く</a></div>
+ </main>
+ <section id="reader-panel" role="dialog" aria-modal="true" aria-label="大きな文字で読む" hidden>
+  <div class="reader-sheet">
+   <div class="reader-bar">
+    <strong id="reader-number">01 / 28</strong>
+    <div class="reader-actions">
+     <button id="reader-prev" aria-label="前のページ">← 前へ</button>
+     <button id="reader-next" aria-label="次のページ">次へ →</button>
+     <button id="reader-close" aria-label="大きな文字の表示を閉じる">閉じる ×</button>
+    </div>
+   </div>
+   <div id="reader-text" tabindex="0"></div>
+  </div>
+ </section>
+ <script>
+  // Desktop browsers change their CSS viewport when zooming. Keep the entire
+  // book (art, prose, controls and hit-testing) in one stable coordinate space.
+  // Scaling the iframe also scales pointer coordinates without game-code edits.
+  const frame=document.getElementById('story-frame');
+  const readerPanel=document.getElementById('reader-panel');
+  const readerText=document.getElementById('reader-text');
+  const readerPrev=document.getElementById('reader-prev');
+  const readerNext=document.getElementById('reader-next');
+  const design={width:1600,height:900};
+  let currentReading={page:1,total:28,text:''};
+  function renderLargeText(){
+   document.getElementById('reader-number').textContent=String(currentReading.page).padStart(2,'0')+' / '+currentReading.total;
+   readerText.textContent=currentReading.text;
+   readerPrev.disabled=currentReading.page<=1;
+   readerNext.disabled=currentReading.page>=currentReading.total;
+   readerText.scrollTop=0;
+  }
+  function closeReader(){readerPanel.hidden=true;frame.focus()}
+  window.addEventListener('message',event=>{
+   if(event.source!==frame.contentWindow||event.origin!==location.origin||!event.data)return;
+   if(event.data.type==='shiro-reading-page'){
+    currentReading={page:event.data.page,total:event.data.total,text:event.data.text};
+    if(!readerPanel.hidden)renderLargeText();
+   }else if(event.data.type==='shiro-open-reader'){
+    readerPanel.hidden=false;
+    renderLargeText();
+    document.getElementById('reader-close').focus();
+   }
+  });
+  function readerNavigate(direction){frame.contentWindow?.postMessage({type:'shiro-reader-nav',direction},location.origin)}
+  readerPrev.addEventListener('click',()=>readerNavigate(-1));
+  readerNext.addEventListener('click',()=>readerNavigate(1));
+  document.getElementById('reader-close').addEventListener('click',closeReader);
+  readerPanel.addEventListener('click',event=>{if(event.target===readerPanel)closeReader()});
+  window.addEventListener('keydown',event=>{
+   if(readerPanel.hidden)return;
+   if(event.key==='Escape'){event.preventDefault();closeReader();return}
+   if(event.key==='Tab'){
+    const targets=[...readerPanel.querySelectorAll('button:not(:disabled),[tabindex="0"]')];
+    const first=targets[0],last=targets[targets.length-1];
+    if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus()}
+    else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus()}
+   }
+  });
+  let pending=0;
+  function fitBook(){
+   const w=document.documentElement.clientWidth;
+   const h=document.documentElement.clientHeight;
+   const touchFirst=matchMedia('(pointer:coarse)').matches && screen.width<=1200;
+   const mobileLayout=touchFirst || screen.width<900;
+   if(mobileLayout){
+    // Let the original responsive page manage scrolling and reading on phones.
+    frame.style.width=w+'px';
+    frame.style.height=h+'px';
+    frame.style.left='0px';
+    frame.style.top='0px';
+    frame.style.transform='none';
+    return;
+   }
+   const scale=Math.min(w/design.width,h/design.height);
+   const fittedWidth=design.width*scale;
+   const fittedHeight=design.height*scale;
+   frame.style.width=design.width+'px';
+   frame.style.height=design.height+'px';
+   frame.style.left=Math.max(0,(w-fittedWidth)/2)+'px';
+   frame.style.top=Math.max(0,(h-fittedHeight)/2)+'px';
+   frame.style.transform=`scale(${scale})`;
+  }
+  function scheduleFit(){cancelAnimationFrame(pending);pending=requestAnimationFrame(fitBook)}
+  window.addEventListener('resize',scheduleFit,{passive:true});
+  window.addEventListener('orientationchange',scheduleFit,{passive:true});
+  window.visualViewport?.addEventListener('resize',scheduleFit,{passive:true});
+  fitBook();
+ </script>
+</body>
+</html>

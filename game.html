@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#102c37"><title>しろつち — 息づく絵本</title>
+<meta name="description" content="『しろつち』全28ページ。湖の村とリオ、しろつち、モーラの物語を体験するデジタル絵本。">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;600&family=Shippori+Mincho:wght@400;600&display=swap');
+:root{color-scheme:dark;--ink:#ecede7;--muted:#b7c8c7;--gold:#d7c7a0}*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#0c242e;color:var(--ink);font-family:'Noto Serif JP',serif}button{font:inherit}button:focus-visible{outline:2px solid #f1e0ad;outline-offset:4px}body{overflow-x:hidden}.app{min-height:100dvh;position:relative;isolation:isolate;display:flex;flex-direction:column;overflow:hidden;background:radial-gradient(ellipse at 50% 50%,#345964 0%,#172f3d 55%,#0b202b 100%);transition:background 1.2s}.app[data-page="0"]{background:radial-gradient(ellipse at 50% 50%,#426b73 0%,#223d4a 48%,#0d2530 100%)}.app[data-page="2"]{background:radial-gradient(ellipse at 50% 40%,#526a6d 0%,#1e3a45 62%,#0b232f 100%)}.app[data-page="3"]{background:radial-gradient(ellipse at 55% 40%,#6b7874 0%,#244550 55%,#0e2531 100%)}.sky{position:absolute;inset:0 0 31%;background:radial-gradient(ellipse at 52% 78%,#b9c5b262,transparent 45%),linear-gradient(#142f3a66,#77919422);pointer-events:none}.moon{position:absolute;top:12%;left:52%;width:10rem;aspect-ratio:1;border-radius:50%;background:#d2d4bd;filter:blur(38px);opacity:.22;transform:translateX(-50%)}.hills{position:absolute;left:-5%;right:-5%;bottom:34%;height:28%;background:#233f45;clip-path:polygon(0 78%,10% 59%,23% 69%,36% 35%,48% 66%,58% 45%,71% 67%,84% 39%,100% 70%,100% 100%,0 100%);opacity:.72}.hills.back{bottom:38%;background:#58716b;opacity:.32;transform:scaleX(-1)}.lake{position:absolute;inset:61% 0 0;background:linear-gradient(#779b9685 0%,#345c69 7%,#173847 55%,#0c2534 100%);overflow:hidden;cursor:pointer;touch-action:manipulation}.lake:before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(177deg,transparent 0 27px,#dde0c31b 28px 29px,transparent 30px 49px);animation:water 10s ease-in-out infinite alternate}.lake:after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:#d1d8bc99;box-shadow:0 0 45px 15px #c5ceb43c}.ripple{position:absolute;width:25px;height:25px;border:1px solid #e5f3dfad;border-radius:50%;transform:translate(-50%,-50%) scale(.1);animation:ripple 1.9s ease-out forwards;pointer-events:none}.mist{position:absolute;left:-20%;width:140%;height:15%;border-radius:50%;filter:blur(22px);background:#c2d7c34d;opacity:.5;animation:mist 15s ease-in-out infinite alternate;pointer-events:none}.mist.m1{bottom:35%}.mist.m2{bottom:48%;animation-duration:21s;animation-delay:-7s;opacity:.24}.stars{position:absolute;inset:0;opacity:.4;background-image:radial-gradient(#faf7d9 1px,transparent 1.5px);background-size:73px 93px;mask-image:linear-gradient(#000,transparent 65%)}.shore{position:absolute;bottom:24%;left:0;width:44%;height:12%;background:#0b2933;clip-path:polygon(0 30%,27% 45%,55% 63%,100% 100%,0 100%);pointer-events:none}.pier{position:absolute;bottom:15%;right:0;width:47%;height:10%;background:#162c31;clip-path:polygon(0 40%,100% 12%,100% 61%,13% 100%);opacity:0;transition:opacity .8s}.app[data-page="2"] .pier,.app[data-page="3"] .pier{opacity:1}
+.character{position:absolute;bottom:23%;left:17%;width:160px;height:290px;transform-origin:50% 96%;animation:breath 4.7s ease-in-out infinite;filter:drop-shadow(0 12px 15px #0717208c);opacity:0;transition:opacity .9s,transform .9s;pointer-events:none}.app[data-page="1"] .character,.app[data-page="2"] .character,.app[data-page="3"] .character{opacity:1}.app[data-page="3"] .character{transform:translateX(23px) scale(.92)}.hair{position:absolute;width:92px;height:100px;top:15px;left:34px;border-radius:43% 48% 35% 42%;background:#1a292b;transform:rotate(-5deg)}.face{position:absolute;left:44px;top:34px;width:78px;height:92px;border-radius:42% 43% 49% 50%;background:#c5a88b;transform:rotate(-5deg)}.fringe{position:absolute;left:37px;top:13px;width:91px;height:57px;border-radius:60% 30% 40% 15%;background:#202f30;clip-path:polygon(0 0,100% 0,100% 70%,76% 47%,48% 68%,23% 51%,5% 88%)}.eyes{position:absolute;top:87px;left:57px;display:flex;gap:25px;transform:rotate(-5deg)}.eye{width:8px;height:7px;border-radius:50%;background:#283535;animation:blink 6.8s infinite;transform-origin:center}.eye:last-child{animation-delay:.08s}.body-shape{position:absolute;top:127px;left:28px;width:108px;height:134px;background:#607b79;border-radius:45% 42% 12% 17%;clip-path:polygon(25% 0,75% 0,100% 99%,0 99%)}.scarf{position:absolute;top:123px;left:43px;width:82px;height:27px;background:#c3bd9e;border-radius:40% 45% 70% 30%;transform:rotate(4deg)}.arm{position:absolute;top:153px;left:9px;width:38px;height:93px;background:#57716f;border-radius:30px;transform:rotate(12deg)}.leg{position:absolute;bottom:0;left:45px;width:29px;height:48px;background:#293f43;border-radius:0 0 13px 8px;box-shadow:38px 0 #293f43}.character .shadow{position:absolute;bottom:-13px;left:16px;width:135px;height:20px;border-radius:50%;background:#081b2199;filter:blur(7px)}.pulse{position:absolute;top:49%;left:48%;width:9px;height:9px;background:#f4cf9a;border-radius:50%;box-shadow:0 0 18px #edcfa7;opacity:0;animation:pulse 4.7s infinite}.app[data-page="3"] .pulse{opacity:.8}
+.topbar{position:relative;z-index:5;display:flex;justify-content:space-between;align-items:center;padding:22px clamp(18px,4vw,64px);gap:16px}.brand{font-size:1.12rem;letter-spacing:.3em;color:#e7e6d9;text-decoration:none}.tag{font-size:.65rem;color:#c3c9bd;letter-spacing:.23em;margin-left:12px}.tools{display:flex;gap:9px}.tool{border:1px solid #d3e1d044;color:#e4e9e3;background:#112f3e66;border-radius:100px;padding:10px 14px;font-size:.75rem;cursor:pointer}.tool[aria-pressed="true"]{border-color:#decfa2;background:#decfa227;color:#f6e8c4}.stage{position:relative;z-index:4;flex:1;display:flex;align-items:center;justify-content:center;padding:8px 22px 80px;min-height:620px;pointer-events:none}.book{width:min(960px,100%);display:grid;grid-template-columns:1fr 1fr;gap:6vw;align-items:center;pointer-events:none}.page-index{font-size:.7rem;letter-spacing:.3em;color:#c9d1c5;text-transform:uppercase;margin-bottom:24px}.copy{max-width:450px;margin-left:auto;text-shadow:0 2px 10px #102b32a6;pointer-events:auto;min-height:340px;display:flex;flex-direction:column;justify-content:center}.copy h1{font-family:'Shippori Mincho',serif;font-weight:400;font-size:clamp(3.4rem,6vw,6rem);letter-spacing:.28em;margin:0 0 20px}.copy h2{font-family:'Shippori Mincho',serif;font-size:clamp(1.6rem,2.6vw,2.35rem);font-weight:400;letter-spacing:.13em;line-height:1.7;margin:0 0 24px}.copy p{font-size:clamp(.92rem,1.2vw,1.04rem);line-height:2.4;letter-spacing:.055em;margin:0 0 17px;opacity:0;transform:translateY(9px);animation:reveal .9s forwards}.copy p:nth-of-type(2){animation-delay:.6s}.copy p:nth-of-type(3){animation-delay:1.2s}.copy p:nth-of-type(4){animation-delay:1.8s}.copy p:nth-of-type(5){animation-delay:2.4s}.copy .intro{font-size:.9rem;color:#e0d1b2;letter-spacing:.2em}.hint{font-size:.75rem;color:#dfdfc7;letter-spacing:.1em;line-height:1.8;min-height:35px}.hint b{color:#fff3c8;font-weight:400}.page-art{height:390px;position:relative}.touch-bubble{position:absolute;bottom:7%;left:14%;font-size:.73rem;color:#e3e5d2;background:#152f3c88;border:1px solid #c2d2c344;border-radius:100px;padding:10px 17px;white-space:nowrap;pointer-events:auto;cursor:pointer;animation:bob 3s ease-in-out infinite}.app[data-page="0"] .touch-bubble,.app[data-page="1"] .touch-bubble{display:none}.footer{position:relative;z-index:8;padding:0 clamp(16px,4vw,64px) 24px;display:flex;align-items:center;justify-content:space-between;gap:18px}.nav{display:flex;align-items:center;gap:18px}.nav button{cursor:pointer;border:1px solid #dde6d25a;border-radius:50%;width:49px;height:49px;background:#102c39a6;color:#f7f7e9;font-size:1.3rem;transition:transform .2s,background .2s}.nav button:hover:not(:disabled){transform:translateY(-3px);background:#3b5960}.nav button:disabled{opacity:.26;cursor:default}.progress{display:flex;gap:9px}.dot{width:26px;height:2px;background:#e4e7d14b;border:0;padding:0;cursor:pointer}.dot.active{background:#f1e0b6;height:3px}.footer-note{font-size:.72rem;color:#bbc7bf;letter-spacing:.14em}.turn-layer{position:absolute;z-index:20;inset:0;background:linear-gradient(90deg,#0e2732,#6e8986 50%,#153340);transform-origin:right;animation:turn .72s cubic-bezier(.3,.7,.2,1) forwards;pointer-events:none}.turn-layer:after{content:'';position:absolute;right:0;top:0;bottom:0;width:16%;background:linear-gradient(90deg,transparent,#f5f0d738)}.no-motion *{animation-duration:.01ms!important;transition-duration:.01ms!important}@keyframes water{to{transform:translateX(30px) translateY(7px)}}@keyframes mist{to{transform:translateX(9%) translateY(-12px)}}@keyframes ripple{to{transform:translate(-50%,-50%) scale(14);opacity:0}}@keyframes breath{0%,100%{scale:1 1}50%{scale:1.018 1.025}}@keyframes blink{0%,40%,43%,88%,91%,100%{transform:scaleY(1)}41%,89%{transform:scaleY(.07)}}@keyframes pulse{0%,100%{scale:.7;opacity:.3}50%{scale:1.3;opacity:.9}}@keyframes bob{50%{transform:translateY(-5px)}}@keyframes reveal{to{opacity:1;transform:translateY(0)}}@keyframes turn{0%{transform:perspective(1300px) rotateY(0);opacity:.9}100%{transform:perspective(1300px) rotateY(-90deg);opacity:0}}@media(max-width:760px){.topbar{padding:18px}.brand{font-size:.95rem}.tag{display:none}.stage{align-items:flex-end;min-height:680px;padding:0 20px 80px}.book{display:block}.page-art{height:270px}.copy{margin:0;max-width:none;min-height:300px;background:linear-gradient(90deg,#102c39bb,#102c3990);padding:18px 20px;border-radius:14px}.copy h1{font-size:3.4rem}.copy h2{font-size:1.5rem;margin-bottom:13px}.copy p{font-size:.89rem;line-height:2.05;margin-bottom:11px}.character{left:14%;bottom:45%;transform:scale(.78);transform-origin:bottom left}.app[data-page="3"] .character{transform:translateX(12px) scale(.76)}.touch-bubble{left:55%;bottom:35%}.lake{top:59%}.footer{padding:0 18px 17px}.footer-note{display:none}.page-index{margin-bottom:12px}}@media(max-width:390px){.stage{min-height:710px}.copy{padding:15px}.copy p{font-size:.82rem}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+/* 第2稿：映画的な全画面構成 */
+.app{background:linear-gradient(180deg,#102b3a 0%,#4e6a73 45%,#173948 78%,#092331 100%)}.app[data-page="1"]{background:linear-gradient(180deg,#152f3b,#546c6c 47%,#143542 85%)}.app[data-page="2"]{background:linear-gradient(180deg,#1c3544,#6b827d 47%,#193a46 84%)}.app[data-page="3"]{background:linear-gradient(180deg,#203a44,#728681 48%,#1b3d47 83%)}.sky{inset:0 0 30%;opacity:.9}.moon{width:15rem;top:7%;left:66%;opacity:.17}.hills{bottom:39%;height:30%;background:#263d43}.hills.back{bottom:44%;background:#8c9990}.lake{inset:62% 0 0;cursor:crosshair}.shore{width:100%;bottom:24%;height:15%;background:#182f35;clip-path:polygon(0 35%,15% 50%,27% 45%,38% 70%,45% 85%,53% 100%,0 100%)}.mist.m1{bottom:34%}.mist.m2{bottom:51%}.pier{display:none}
+.village{position:absolute;z-index:1;inset:0;pointer-events:none;opacity:.85;transition:opacity 1s}.app[data-page="2"] .village,.app[data-page="3"] .village{opacity:.46}.cottage{position:absolute;bottom:37%;width:clamp(55px,7vw,112px);height:clamp(55px,6vw,91px);background:#26383b;box-shadow:inset 0 0 14px #162b30;clip-path:polygon(0 42%,50% 3%,100% 42%,91% 42%,91% 100%,9% 100%,9% 42%)}.cottage:after{content:'';position:absolute;width:12%;height:20%;left:60%;top:59%;background:#c9b78d9c;box-shadow:0 0 18px #edcd9b85}.cottage.c1{left:7%;bottom:40%;scale:.84}.cottage.c2{left:20%;bottom:38%;scale:1.15}.cottage.c3{left:37%;bottom:40%;scale:.64}.cottage.c4{right:7%;bottom:41%;scale:.83}
+.character{display:none}.rio-figure{position:absolute;z-index:3;bottom:12%;right:10%;height:min(72vh,720px);aspect-ratio:2/3;opacity:0;transform:translateY(35px);transition:opacity 1s,transform 1s;pointer-events:none;filter:drop-shadow(0 14px 16px #071c2290);animation:rio-breath 5.2s ease-in-out infinite;transform-origin:50% 96%}.rio-figure img{display:block;width:100%;height:100%;object-fit:contain}.app[data-page="2"] .rio-figure,.app[data-page="3"] .rio-figure{opacity:1;transform:translateY(0)}.rio-blink{position:absolute;top:18.9%;height:1.4%;width:3.7%;border-radius:40% 40% 70% 70%;background:#e7b897;transform:scaleY(0);transform-origin:center;animation:rio-blink 6.1s infinite}.rio-blink.left{left:44.6%}.rio-blink.right{left:55.1%;animation-delay:.07s}
+.stage{padding:0;align-items:stretch;justify-content:stretch;min-height:620px}.book{width:100%;display:block;pointer-events:none}.page-art{display:none}.copy{position:absolute;z-index:5;bottom:10%;left:clamp(22px,7vw,112px);right:auto;width:min(660px,65vw);min-height:auto;max-width:none;display:block;margin:0;padding:26px 30px 22px;background:linear-gradient(110deg,#09222fe6,#102f3dc9 78%,#12374670);border:1px solid #dae4d72e;border-radius:16px;box-shadow:0 18px 65px #071f2b50;text-shadow:0 2px 12px #071f2b80;backdrop-filter:blur(8px)}.copy h2{font-size:clamp(1.65rem,2.5vw,2.15rem);margin:0 0 12px}.copy h1{font-size:clamp(1.65rem,2.5vw,2.15rem);letter-spacing:.14em;margin:0 0 12px}.copy p{font-size:clamp(.87rem,1.1vw,1.02rem);line-height:2.05;margin:0 0 11px;letter-spacing:.028em}.page-index{margin-bottom:9px;color:#d6d9cc}.copy .hint{margin-top:8px;color:#c7d4d0;font-size:.73rem}.copy:before{content:'';position:absolute;top:-3px;left:30px;width:72px;height:2px;background:#d4c8a5}
+.topbar{z-index:9}.footer{z-index:9}.footer-note{letter-spacing:.03em}.app[data-page="0"] .rio-figure,.app[data-page="1"] .rio-figure{opacity:0}.app[data-page="3"] .rio-figure{right:7%;height:min(80vh,760px)}.app[data-page="2"] .rio-figure{right:8%}
+.touch-bubble{display:none!important}@keyframes rio-breath{0%,100%{scale:1 1}50%{scale:1.008 1.018}}@keyframes rio-blink{0%,39%,42%,84%,87%,100%{transform:scaleY(0)}40%,85%{transform:scaleY(1)}}@media(max-width:760px){.stage{min-height:calc(100dvh - 110px)}.rio-figure{height:min(57vh,530px);bottom:24%;right:-5%}.app[data-page="3"] .rio-figure{height:min(59vh,550px);right:-8%}.copy{left:14px;right:14px;bottom:4%;width:auto;padding:19px 19px 15px;max-height:49vh;overflow-y:auto}.copy h1,.copy h2{font-size:1.44rem;margin-bottom:9px}.copy p{font-size:.84rem;line-height:1.85;margin-bottom:8px}.copy .hint{font-size:.67rem}.footer{padding:0 16px 14px}.lake{top:61%}.village .cottage.c4{display:none}.footer-note{display:none}}@media(max-width:390px){.copy{max-height:53vh}.copy p{font-size:.8rem;line-height:1.75}.rio-figure{bottom:29%}}
+</style>
+<link rel="stylesheet" href="story.css?v=97">
+<link rel="preload" href="assets/shirotsuchi_01_mizuumino_mura.ogg" as="audio" type="audio/ogg">
+<link rel="stylesheet" href="interactions.css?v=34">
+</head>
+<body>
+<main class="app" id="app" data-page="0">
+ <div class="sky"></div><div class="moon"></div><div class="stars"></div><div class="hills back"></div><div class="hills"></div><div class="tree-line"></div><div class="village" aria-hidden="true"><span class="cottage c1"></span><span class="cottage c2"></span><span class="cottage c3"></span><span class="cottage c4"></span></div><div class="lake" id="lake" role="button" tabindex="0" aria-label="湖に触れて波紋を起こす"></div><div class="mist m1"></div><div class="mist m2"></div><div class="shore"></div><div class="flower-field"></div><div class="ground-line" aria-hidden="true"></div><div class="pier"></div>
+ <div class="character" aria-label="ゆっくり呼吸し瞬きをするリオ" role="img"><div class="shadow"></div><div class="leg"></div><div class="body-shape"></div><div class="arm"></div><div class="hair"></div><div class="face"></div><div class="eyes"><span class="eye"></span><span class="eye"></span></div><div class="fringe"></div><div class="scarf"></div><div class="pulse"></div></div>
+ <div class="rio-figure" role="img" aria-label="リオの正式な立ち絵。小さく呼吸し、ときどき瞬きをする"><img src="assets/rio.webp" alt=""><img class="rio-cheek-tear" src="assets/rio_cheek_tear.webp" alt="" aria-hidden="true"><span class="rio-blink left"></span><span class="rio-blink right"></span></div>
+ <div class="shiro-figure" id="shiro" role="img" tabindex="-1" aria-label="しろつちの立ち絵"><img src="assets/shiro.webp" alt="しろつち"><span class="shiro-crack-light" aria-hidden="true"></span><span class="tear-contact-light" aria-hidden="true"></span><span class="blink-lid shiro-lid" data-eye="0"></span><span class="blink-lid shiro-lid" data-eye="1"></span></div>
+ <div class="mora-figure" id="mora" role="img" aria-label="モーラの立ち絵"><img src="assets/mora.webp" alt="モーラ"><span class="blink-lid mora-lid" data-eye="0"></span><span class="blink-lid mora-lid" data-eye="1"></span></div>
+ <div class="combined-figure" id="rio-hug" role="img" aria-label="リオがしろつちを大切に抱きしめる"><img src="assets/rio_hug.webp" alt="リオとしろつちの抱擁"></div>
+ <div class="memory-hand" id="grandmother-hand" aria-hidden="true"><img src="assets/grandmother_hand_p22.webp" alt=""></div>
+ <div class="grandmother-memory" aria-hidden="true"><img src="assets/grandmother_memory.webp" alt=""></div>
+ <div class="lumia-garden" aria-hidden="true"><div class="lumia-flower flower-a"><img src="assets/lumia_sprout.webp" alt=""></div><div class="lumia-flower flower-b"><img src="assets/lumia_bud.webp" alt=""></div></div>
+ <div class="lumia-petals" aria-hidden="true"><img class="petal-a" src="assets/lumia_petal.webp" alt=""><img class="petal-b" src="assets/lumia_petal.webp" alt=""></div>
+ <div class="lumia-atmosphere" aria-hidden="true"><div class="lumia-atmosphere-blooms"></div><div class="lumia-atmosphere-petals"></div></div>
+ <div class="scene-foreground" aria-hidden="true"><img class="foreground-forest" src="assets/forest_foreground.webp" alt=""><img class="foreground-village" src="assets/lumia_village_foreground.webp" alt=""><img class="foreground-waterside" src="assets/lumia_waterside_foreground.webp" alt=""></div>
+ <div class="falling-tear" id="falling-tear" aria-hidden="true"><img src="assets/falling_tear.webp" alt=""></div>
+ <div id="hotspot-layer" aria-label="触れられる物語の場面"></div><div id="scene-particles" aria-hidden="true"></div>
+ <header class="topbar"><a class="brand" href="#" id="home">しろつち <span class="tag">デジタル絵本</span></a><div class="tools"><label class="mode-label" for="reading-mode">読み方</label><select id="reading-mode" aria-label="読書モード"><option value="manual">自分で読む</option><option value="listen">読み聞かせ</option><option value="movie">映画モード</option></select><button class="tool" id="auto" aria-pressed="false" aria-label="自動送りを開始">▶ 自動送り</button><button class="tool" id="bgm" aria-pressed="true" aria-label="BGMを停止">♫ BGM ON</button><button class="tool" id="sound" aria-pressed="false">♪ 効果音 OFF</button><button class="tool" id="motion" aria-pressed="false">動きを抑える</button><button class="tool" id="large-print" aria-haspopup="dialog" aria-label="本文を大きな文字で読む">文字を拡大</button></div></header>
+ <div class="narration-alert" id="narration-alert" role="status" aria-live="polite" hidden><span id="narration-alert-text"></span><button id="narration-retry" type="button">読み上げを再試行</button><button id="narration-manual" type="button">自分で読む</button></div>
+ <section class="stage" aria-live="polite"><div class="book"><div class="page-art"><button class="touch-bubble" id="waterTouch">水面にふれてみる ↗</button></div><article class="copy" id="copy"></article></div></section>
+ <footer class="footer"><div class="progress" id="progress" aria-label="ページの移動"></div><div class="nav"><button id="prev" aria-label="前のページ">←</button><span id="number" style="font-size:.8rem;color:#d9dfcf;letter-spacing:.15em">01 / 28</span><button id="next" aria-label="次のページ">→</button></div><div class="footer-note">全28ページ</div></footer>
+</main>
+<script src="story28.js?v=93"></script>
+<script>
+const pages=STORY_PAGES;
+const app=document.getElementById('app'),copy=document.getElementById('copy'),lake=document.getElementById('lake');let page=0,beat=0,sound=false,audioCtx=null,turning=false;const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function escapeHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>')}
+function formatText(s){const parts=s.match(/「[^」]*」|[^「」]+/g)||[];return parts.map((raw,i)=>{let t=raw;
+ if(i>0&&parts[i-1].startsWith('「'))t=t.replace(/^\n/,'');
+ if(i+1<parts.length&&parts[i+1].startsWith('「'))t=t.replace(/\n$/,'');
+ if(t==='「強い気持ちは、病になる」'||t==='「だいじょうぶだよ」')return `<span class="narration">${escapeHtml(t)}</span>`;
+ if(t.startsWith('「'))return `<span class="dialogue">${escapeHtml(t)}</span>`;
+ return (t.match(/[^。！？]+[。！？]?/g)||[t]).map(part=>`<span class="narration">${escapeHtml(part)}</span>`).join('');
+}).join('')}
+// 原稿の28ページと画面を一対一にする。本文は省略せず、枠内スクロールさせない。
+function beatsOf(s){return [s]}
+function fitCopyText(){
+ const text=copy.querySelector('.story-text');if(!text)return;
+ text.style.removeProperty('font-size');
+ copy.classList.remove('copy-needs-scroll');
+ let size=parseFloat(getComputedStyle(text).fontSize);
+ // 背景のぼかし疑似要素は scrollHeight に含まれるため、本文の高さだけで判定する。
+ const style=getComputedStyle(copy);
+ const padding=parseFloat(style.paddingTop)+parseFloat(style.paddingBottom);
+ const minimum=15;
+ for(let n=0;n<22&&text.scrollHeight+padding>copy.clientHeight+2&&size>minimum;n++){
+  size=Math.max(minimum,size-.5);text.style.setProperty('font-size',`${size}px`,'important');
+ }
+ // Never hide the end of a paragraph at high browser zoom. Keep a readable
+ // type size and let the narration region scroll if its available height shrinks.
+ if(text.scrollHeight+padding>copy.clientHeight+2)copy.classList.add('copy-needs-scroll');
+}
+// ページ単位ではなく、物語の章単位で文章位置を固定する。
+function textLayoutForPage(index){
+ if(index===0)return 'landscape';            // P1のみ導入の広い読み枠
+ if(index<=10)return 'high-right';           // P2〜11 P5と同じ位置・横幅
+ if(index<=14)return 'mora-center';          // P12〜15 モーラとの対話
+ if(index<=24)return 'finale-center';        // P16〜25 P20と同じ右側位置
+ return 'ending-low';                        // P26〜28 結末はやや下に
+}
+function render(){app.dataset.page=page;let p=pages[page],beats=beatsOf(p.text);app.dataset.scene=p.scene;app.dataset.textLayout=textLayoutForPage(page);copy.innerHTML=`<div class="story-text">${formatText(beats[beat])}</div>`;copy.scrollTop=0;const rio=document.querySelector('.rio-figure'),shiro=document.getElementById('shiro'),mora=document.getElementById('mora');rio.classList.toggle('is-visible',p.cast.includes('rio'));rio.classList.toggle('is-hidden',!p.cast.includes('rio'));shiro.classList.toggle('is-visible',p.cast.includes('shiro'));mora.classList.toggle('is-visible',p.cast.includes('mora'));document.getElementById('number').textContent=String(page+1).padStart(2,'0')+' / '+String(pages.length).padStart(2,'0');document.getElementById('prev').disabled=page===0&&beat===0;document.getElementById('next').disabled=page===pages.length-1&&beat===beats.length-1;document.getElementById('progress').innerHTML=pages.map((_,i)=>`<button class="dot ${i===page?'active':''}" data-goto="${i}" aria-label="${i+1}ページへ" ${i===page?'aria-current="page"':''}></button>`).join('');document.querySelectorAll('[data-goto]').forEach(b=>b.onclick=()=>go(+b.dataset.goto));if(window.parent!==window)window.parent.postMessage({type:'shiro-reading-page',page:page+1,total:pages.length,text:p.text},location.origin);}
+document.getElementById('large-print').addEventListener('click',()=>{if(window.parent!==window)window.parent.postMessage({type:'shiro-open-reader'},location.origin);else document.getElementById('copy').focus()});
+const baseRender=render;
+const poseByPage={5:'meet',6:'meet',7:'warm',8:'care',9:'care',10:'care',11:'confront',12:'confront',13:'confront',15:'listen',16:'listen',17:'listen',18:'listen',26:'reconcile',27:'reconcile'};
+const rioMirrorPages=new Set([6,8,11,13,16,18,26]);
+// P24 faces forward: flipping the figure across scaleX=0 during its glow
+// made the body collapse into a vertical line for a transition frame.
+const shiroMirrorPages=new Set([5,7,9,15,17]);
+const moraMirrorPages=new Set([12,16,18,27]);
+const actionByPage={2:'wonder',5:'discover',6:'discover',7:'hop',9:'spark',10:'fragile',11:'loom',12:'loom',17:'listen',23:'radiance',24:'farewell',27:'breeze'};
+const suppliedBackgroundByPage={0:'village',1:'room-day',2:'lakeside-morning',3:'village-well',4:'room-night',5:'moon-lake',6:'moon-lake',7:'moon-lake',8:'barn',9:'barn-amber',10:'barn-amber',11:'forest',12:'forest',13:'forest',14:'plaza',15:'rocky-lake',16:'rocky-lake',17:'rocky-lake',18:'rocky-lake',19:'village-quiet',20:'lumia-village',21:'lumia-village',22:'lumia-village',23:'lumia-village',24:'lumia-village',25:'lumia-village',26:'flower-lake',27:'flower-lake'};
+// ページをめくった瞬間に旧背景が見えないよう、使用する背景を先読みする。
+for(const name of new Set(Object.values(suppliedBackgroundByPage))){const preload=new Image();preload.src=`assets/scene-${name}.webp`}
+let autoAdvance=false,autoTimer=null,pendingNavigation=null,transitionTarget=page;
+function updateAutoButton(){const button=document.getElementById('auto');button.setAttribute('aria-pressed',String(autoAdvance));button.setAttribute('aria-label',autoAdvance?'自動送りを停止':'自動送りを開始');button.textContent=autoAdvance?'Ⅱ 自動送り停止':'▶ 自動送り'}
+function scheduleAutoAdvance(){
+ clearTimeout(autoTimer);autoTimer=null;
+ if(!autoAdvance||document.hidden)return;
+ if(page===pages.length-1){autoAdvance=false;updateAutoButton();return}
+ // 文章量に合わせて約10〜26秒。読書中の余韻も少し残す。
+ const duration=Math.max(10000,Math.min(26000,pages[page].text.length*170+3000));
+ autoTimer=setTimeout(()=>{autoTimer=null;if(autoAdvance&&!turning)go(page+1);else scheduleAutoAdvance()},duration);
+}
+let lastPuppetPage=-1;
+render=function(){
+ baseRender();
+ if(suppliedBackgroundByPage[page])app.dataset.sceneArt=suppliedBackgroundByPage[page];
+ else delete app.dataset.sceneArt;
+ app.dataset.pose=poseByPage[page]||'front';
+ app.dataset.rioMirror=rioMirrorPages.has(page)?'yes':'no';
+ app.dataset.shiroMirror=shiroMirrorPages.has(page)?'yes':'no';
+ app.dataset.moraMirror=moraMirrorPages.has(page)?'yes':'no';
+ app.dataset.action=actionByPage[page]||'calm';
+ positionBlinkLids();
+ if(lastPuppetPage!==page){playPuppetScene();lastPuppetPage=page;}
+ scheduleAutoAdvance();
+ requestAnimationFrame(fitCopyText);
+};
+// object-fit:contain の余白を考慮し、元画像の瞳の座標へまぶたを合わせる。
+const blinkTargets=[
+ {id:'shiro',ratio:1024/1536,eyes:[[.416,.105,.040,.038],[.584,.085,.040,.037]]},
+ {id:'mora',ratio:1312/1199,eyes:[[.607,.255,.020,.017],[.666,.260,.020,.017]]}
+];
+function positionBlinkLids(){
+ for(const item of blinkTargets){
+  const root=document.getElementById(item.id),w=root.offsetWidth,h=root.offsetHeight;
+  if(!w||!h)continue;
+  const contentW=Math.min(w,h*item.ratio),contentH=contentW/item.ratio;
+  const x0=(w-contentW)/2,y0=(h-contentH)/2;
+  const variant=item.id==='shiro'?app.dataset.shiroVariant:'default';
+  // The face in each supplied pose has its own painted eye coordinates.
+  // The leaning portrait is not compatible with the front-facing eyelids.
+  const eyes=item.id==='shiro'&&variant==='lean'?[[.481,.104,.052,.038],[.668,.105,.039,.040]]:item.eyes;
+  root.querySelectorAll('.blink-lid').forEach((lid,i)=>{
+   const [x,y,ew,eh]=eyes[i];
+   lid.style.left=`${x0+(x-ew/2)*contentW}px`;
+   lid.style.top=`${y0+(y-eh/2)*contentH}px`;
+   lid.style.width=`${ew*contentW}px`;
+   lid.style.height=`${eh*contentH}px`;
+  });
+ }
+}
+let layoutResizeFrame=0;
+window.addEventListener('resize',()=>{
+ cancelAnimationFrame(layoutResizeFrame);
+ layoutResizeFrame=requestAnimationFrame(()=>{positionBlinkLids();fitCopyText()});
+});
+// ペープサートの演じ方：動く役を一体に絞り、登場・発話・反応を一度だけ演じる。
+// ページ番号はゼロ始まり。連続した呼吸と区別し、次のページでは動作を中断する。
+const puppetCues={
+ 1:[['rio','enter-right']],2:[['rio','ponder']],3:[['rio','recoil']],4:[['rio','listen']],
+ 5:[['rio','walk-in'],['shiro','rise']],6:[['shiro','startle'],['rio','lean']],
+ 7:[['rio','lean'],['shiro','jump']],8:[['rio','walk-in'],['shiro','settle']],
+ 9:[['shiro','rise']],10:[['rio','lean'],['shiro','droop']],
+ 11:[['mora','enter-right'],['rio','recoil']],12:[['mora','approach']],
+ 13:[['mora','speak'],['rio','answer']],14:[['rio','protect']],
+ 15:[['mora','lead'],['rio','follow']],16:[['mora','speak']],
+ 17:[['mora','speak'],['shiro','listen']],18:[['mora','bow'],['shiro','lean']],
+ 19:[['rio','look-up']],20:[['rio','recoil']],21:[['rio','remember']],
+ 22:[['rio','weep']],23:[['shiro','rise']],24:[['shiro','farewell'],['rio','protect']],
+ 25:[['rio','weep']],26:[['mora','bow'],['rio','approach']],27:[['rio','walk-away']]
+};
+const puppetMoves={
+ 'enter-right':[['28vw','-3deg'],['9vw','2deg'],['0','0deg']],
+ 'enter-left':[['-28vw','3deg'],['-9vw','-2deg'],['0','0deg']],
+ 'walk-in':[['-18vw','-4deg'],['-9vw','4deg'],['-3vw','-3deg'],['0','0deg']],
+ 'walk-away':[['0','0deg'],['7vw','-4deg'],['18vw','3deg']],
+ 'follow':[['-10vw','-3deg'],['-6vw','3deg'],['-2vw','-3deg'],['0','0deg']],
+ 'lead':[['15vw','0deg'],['7vw','-3deg'],['0','0deg']],
+ 'approach':[['13vw','0deg'],['4vw','-2deg'],['0','0deg']],
+ 'ponder':[['0','0deg'],['0','-5deg'],['0','0deg']],
+ 'listen':[['0','0deg'],['0','-8deg'],['0','-3deg']],
+ 'speak':[['0','0deg'],['-1vw','-4deg'],['0','1deg'],['0','0deg']],
+ 'answer':[['0','0deg'],['0','5deg'],['0','-2deg'],['0','0deg']],
+ 'lean':[['0','0deg'],['3vw','9deg'],['2vw','5deg'],['0','0deg']],
+ 'look-up':[['0','0deg'],['0','-8deg'],['0','-4deg']],
+ 'bow':[['0','0deg'],['0','10deg'],['0','7deg']],
+ 'remember':[['0','0deg'],['0','-9deg'],['0','-6deg']],
+ 'protect':[['0','0deg'],['-2vw','7deg'],['-1vw','4deg']],
+ 'recoil':[['0','0deg'],['-4vw','-8deg'],['-3vw','-5deg']],
+ 'rise':[['0 25px','-5deg'],['0 -19px','5deg'],['0 -9px','-3deg'],['0','0deg']],
+ 'startle':[['0','0deg'],['0 -24px','-9deg'],['0 0','5deg'],['0','0deg']],
+ 'jump':[['0','0deg'],['0 -46px','-8deg'],['0 0','7deg'],['0 -13px','-4deg'],['0','0deg']],
+ 'settle':[['0 -20px','-8deg'],['0 0','5deg'],['0','0deg']],
+ 'droop':[['0','0deg'],['0 10px','10deg'],['0 8px','7deg']],
+ 'farewell':[['0','0deg'],['0 -15px','-5deg'],['0 -43px','6deg'],['0 -54px','0deg']],
+ 'weep':[['0','0deg'],['0 8px','7deg'],['0 12px','8deg']]
+};
+const puppetTiming={'jump':1400,'startle':1000,'speak':1850,'farewell':2700,'walk-in':2300,'walk-away':2500,'follow':2100,'lead':2200,'enter-right':1900,'approach':2200};
+let activePuppetAnimations=[];
+function playPuppetScene(){
+ activePuppetAnimations.forEach(a=>a.cancel());activePuppetAnimations=[];
+ if(reduced||app.classList.contains('no-motion'))return;
+ const casts={rio:document.querySelector('.rio-figure'),shiro:document.getElementById('shiro'),mora:document.getElementById('mora')};
+ (puppetCues[page]||[]).forEach(([name,motion],i)=>{
+  const figure=casts[name],poses=puppetMoves[motion];
+  if(!figure||!poses||!figure.classList.contains('is-visible'))return;
+  const frames=poses.map(([position,angle])=>({translate:position.includes(' ')?position:`${position} 0`,rotate:angle}));
+  const animation=figure.animate(frames,{duration:puppetTiming[motion]||1550,delay:i*220,easing:'ease-in-out',fill:'none'});
+  activePuppetAnimations.push(animation);
+ });
+}
+function go(index,last=false){
+ if(index<0||index>=pages.length)return;
+ if(turning){pendingNavigation={index,last};return}
+ if(index===page)return;
+ turning=true;transitionTarget=index;app.dataset.transitioning='true';
+ // Keep old text out of the outgoing portion of the page turn.
+ app.dataset.visualPending='true';
+ const finish=()=>{
+  turning=false;app.dataset.transitioning='false';
+  const queued=pendingNavigation;pendingNavigation=null;
+  if(queued)go(queued.index,queued.last);
+ };
+ const commit=()=>{
+  // Background, cast and text update together; no old-image interpolation.
+  app.classList.add('page-changing');
+  page=index;beat=last?beatsOf(pages[page].text).length-1:0;
+  render();
+  delete app.dataset.visualPending;
+  requestAnimationFrame(()=>requestAnimationFrame(()=>app.classList.remove('page-changing')));
+ };
+ if(!reduced&&!app.classList.contains('no-motion')){
+  const sheet=document.createElement('div');sheet.className='turn-layer';app.appendChild(sheet);
+  setTimeout(commit,210);
+  setTimeout(()=>{sheet.remove();finish()},750);
+ }else{commit();finish()}
+ if(sound)playPage();
+}
+function step(direction){
+ if(turning){
+  // At most one unhandled step. A direct page selection can replace it.
+  if(!pendingNavigation)pendingNavigation={index:transitionTarget+(direction>0?1:-1),last:direction<0};
+  return;
+ }
+ const count=beatsOf(pages[page].text).length;
+ if(direction>0){if(beat<count-1){beat++;render()}else go(page+1)}
+ else{if(beat>0){beat--;render()}else go(page-1,true)}
+}
+window.addEventListener('message',event=>{
+ if(event.source!==window.parent||event.origin!==location.origin||event.data?.type!=='shiro-reader-nav')return;
+ if(event.data.direction===1)step(1);
+ if(event.data.direction===-1)step(-1);
+});
+function chirp(freq=250,duration=.22,type='sine',vol=.05,when=0){if(!sound)return;window.dispatchEvent(new Event('shirotsuchi:sfx'));try{audioCtx??=new (window.AudioContext||window.webkitAudioContext)();audioCtx.resume();let o=audioCtx.createOscillator(),g=audioCtx.createGain(),t=audioCtx.currentTime+when;o.type=type;o.frequency.setValueAtTime(freq,t);o.frequency.exponentialRampToValueAtTime(Math.max(50,freq*.55),t+duration);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(vol,t+.015);g.gain.exponentialRampToValueAtTime(.0001,t+duration);o.connect(g).connect(audioCtx.destination);o.start(t);o.stop(t+duration+.02)}catch(e){}}
+function playWater(){chirp(310,.32,'sine',.036);chirp(570,.18,'sine',.013,.06);chirp(145,.55,'triangle',.012,.1)}function playPage(){chirp(130,.18,'triangle',.015)}
+function water(x,y){const rect=lake.getBoundingClientRect(),r=document.createElement('span');r.className='ripple';r.style.left=(x-rect.left)+'px';r.style.top=(y-rect.top)+'px';lake.appendChild(r);setTimeout(()=>r.remove(),2000);playWater();}
+lake.addEventListener('pointerdown',e=>water(e.clientX,e.clientY));lake.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();const r=lake.getBoundingClientRect();water(r.left+r.width*.5,r.top+r.height*.3)}});document.getElementById('waterTouch').onclick=()=>{const r=lake.getBoundingClientRect();water(r.left+r.width*.52,r.top+r.height*.22)};
+document.getElementById('prev').onclick=()=>step(-1);document.getElementById('next').onclick=()=>step(1);document.getElementById('home').onclick=e=>{e.preventDefault();if(page===0){beat=0;render()}else go(0)};document.addEventListener('keydown',e=>{if(e.target.closest('button'))return;if(e.key==='ArrowRight')step(1);if(e.key==='ArrowLeft')step(-1)});
+document.getElementById('auto').onclick=()=>{autoAdvance=!autoAdvance;updateAutoButton();scheduleAutoAdvance()};
+document.addEventListener('visibilitychange',scheduleAutoAdvance);
+document.getElementById('sound').onclick=e=>{sound=!sound;e.currentTarget.setAttribute('aria-pressed',String(sound));e.currentTarget.textContent=sound?'♪ 効果音 ON':'♪ 効果音 OFF';if(sound)playWater()};document.getElementById('motion').onclick=e=>{const on=app.classList.toggle('no-motion');e.currentTarget.setAttribute('aria-pressed',String(on));e.currentTarget.textContent=on?'動きを戻す':'動きを抑える';if(on)activePuppetAnimations.forEach(a=>a.cancel());else playPuppetScene()};if(reduced)app.classList.add('no-motion');render();
+document.getElementById('shiro').addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.currentTarget.classList.contains('is-touchable')){e.preventDefault();e.currentTarget.click()}});
+</script>
+<script src="interactions.js?v=96"></script>
+<script src="variants.js?v=97"></script>
+<script src="bgm.js?v=92"></script>
+<script src="lumia-atmosphere.js?v=97"></script>
+</body></html>
