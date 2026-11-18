@@ -1577,3 +1577,12 @@
  #app .footer .progress{gap:3px}
  #app .copy{max-height:250px!important}
 }
+
+/* Full prose surfaces: let the text determine height rather than create an inner scroller. */
+#app#app .copy,#app#app .copy.copy-needs-scroll{height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important;scrollbar-width:none!important}
+#app#app .story-text{height:auto!important;max-height:none!important;overflow:visible!important}
+#app.reading-page-overflow{height:auto!important;min-height:100dvh;overflow:visible!important}
+#app.reading-page-overflow .stage{min-height:var(--full-reading-height)!important;flex:1 0 var(--full-reading-height)!important}
+/* Mora keeps the original proportions and foot anchor, with the head nearer the treetops. */
+@media(min-width:761px){#app#app .mora-figure{width:min(80vw,980px)!important}}
+@media(max-width:760px){#app#app .mora-figure{width:122vw!important}}

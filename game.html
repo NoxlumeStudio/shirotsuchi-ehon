@@ -17,9 +17,10 @@
 .topbar{z-index:9}.footer{z-index:9}.footer-note{letter-spacing:.03em}.app[data-page="0"] .rio-figure,.app[data-page="1"] .rio-figure{opacity:0}.app[data-page="3"] .rio-figure{right:7%;height:min(80vh,760px)}.app[data-page="2"] .rio-figure{right:8%}
 .touch-bubble{display:none!important}@keyframes rio-breath{0%,100%{scale:1 1}50%{scale:1.008 1.018}}@keyframes rio-blink{0%,39%,42%,84%,87%,100%{transform:scaleY(0)}40%,85%{transform:scaleY(1)}}@media(max-width:760px){.stage{min-height:calc(100dvh - 110px)}.rio-figure{height:min(57vh,530px);bottom:24%;right:-5%}.app[data-page="3"] .rio-figure{height:min(59vh,550px);right:-8%}.copy{left:14px;right:14px;bottom:4%;width:auto;padding:19px 19px 15px;max-height:49vh;overflow-y:auto}.copy h1,.copy h2{font-size:1.44rem;margin-bottom:9px}.copy p{font-size:.84rem;line-height:1.85;margin-bottom:8px}.copy .hint{font-size:.67rem}.footer{padding:0 16px 14px}.lake{top:61%}.village .cottage.c4{display:none}.footer-note{display:none}}@media(max-width:390px){.copy{max-height:53vh}.copy p{font-size:.8rem;line-height:1.75}.rio-figure{bottom:29%}}
 </style>
-<link rel="stylesheet" href="story.css?v=97">
+<link rel="stylesheet" href="story.css?v=99">
 <link rel="preload" href="assets/shirotsuchi_01_mizuumino_mura.ogg" as="audio" type="audio/ogg">
-<link rel="stylesheet" href="interactions.css?v=34">
+<link rel="stylesheet" href="interactions.css?v=34"><style>html[data-whole-canvas-phone]{-webkit-text-size-adjust:100%;text-size-adjust:100%}</style>
+<script src="whole-canvas-touch.js?v=1"></script>
 </head>
 <body>
 <main class="app" id="app" data-page="0">
@@ -57,20 +58,31 @@ function formatText(s){const parts=s.match(/「[^」]*」|[^「」]+/g)||[];retu
 // 原稿の28ページと画面を一対一にする。本文は省略せず、枠内スクロールさせない。
 function beatsOf(s){return [s]}
 function fitCopyText(){
- const text=copy.querySelector('.story-text');if(!text)return;
+ const text=copy.querySelector('.story-text'),stage=app.querySelector('.stage');if(!text||!stage)return;
  text.style.removeProperty('font-size');
+ copy.style.removeProperty('height');copy.style.removeProperty('translate');
  copy.classList.remove('copy-needs-scroll');
- let size=parseFloat(getComputedStyle(text).fontSize);
- // 背景のぼかし疑似要素は scrollHeight に含まれるため、本文の高さだけで判定する。
+ app.classList.remove('reading-page-overflow');stage.style.removeProperty('--full-reading-height');
+ const px=value=>parseFloat(value)||0;
  const style=getComputedStyle(copy);
- const padding=parseFloat(style.paddingTop)+parseFloat(style.paddingBottom);
- const minimum=15;
- for(let n=0;n<22&&text.scrollHeight+padding>copy.clientHeight+2&&size>minimum;n++){
-  size=Math.max(minimum,size-.5);text.style.setProperty('font-size',`${size}px`,'important');
+ const padding=px(style.paddingTop)+px(style.paddingBottom)+px(style.borderTopWidth)+px(style.borderBottomWidth);
+ let bounds=stage.getBoundingClientRect(),size=px(getComputedStyle(text).fontSize);
+ let needed=()=>Math.ceil(text.scrollHeight+padding);
+ // Grow the surface first. Font reduction is only a last resort in a very small window.
+ for(let n=0;n<32&&needed()>bounds.height-24&&size>15;n++){
+  size=Math.max(15,size-.5);text.style.setProperty('font-size',`${size}px`,'important');
  }
- // Never hide the end of a paragraph at high browser zoom. Keep a readable
- // type size and let the narration region scroll if its available height shrinks.
- if(text.scrollHeight+padding>copy.clientHeight+2)copy.classList.add('copy-needs-scroll');
+ const height=needed();
+ if(height>bounds.height-24){
+  // Keep the text whole: any unavoidable overflow belongs to the page, never the prose box.
+  app.classList.add('reading-page-overflow');stage.style.setProperty('--full-reading-height',`${height+24}px`);
+  bounds=stage.getBoundingClientRect();
+ }
+ copy.style.setProperty('height',`${height}px`,'important');
+ const rect=copy.getBoundingClientRect();
+ const top=Math.max(bounds.top+12,Math.min(rect.top,bounds.bottom-12-height));
+ copy.style.setProperty('translate',`0 ${Math.round(top-rect.top)}px`,'important');
+ copy.scrollTop=0;
 }
 // ページ単位ではなく、物語の章単位で文章位置を固定する。
 function textLayoutForPage(index){
@@ -143,6 +155,7 @@ function positionBlinkLids(){
  }
 }
 let layoutResizeFrame=0;
+document.fonts?.ready.then(fitCopyText);
 window.addEventListener('resize',()=>{
  cancelAnimationFrame(layoutResizeFrame);
  layoutResizeFrame=requestAnimationFrame(()=>{positionBlinkLids();fitCopyText()});

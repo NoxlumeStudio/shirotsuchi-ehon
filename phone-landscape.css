@@ -1,0 +1,34 @@
+#phone-book-shell[hidden]{display:none!important}
+#phone-book-shell{position:fixed;z-index:3;box-sizing:border-box;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);display:grid;grid-template-rows:minmax(0,1fr);color:#f4efdf;pointer-events:none;font-family:serif}
+#phone-book-shell *{box-sizing:border-box}
+.phone-head,.phone-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:0 8px;background:linear-gradient(#102630b8,#10263000);pointer-events:auto}
+.phone-head strong{font-size:16px;font-weight:400;letter-spacing:.15em}
+#phone-book-shell button,#phone-book-shell select{font:14px/1.2 sans-serif;color:inherit;background:#183541;border:1px solid #8b9b9c;border-radius:12px;padding:6px 12px;min-height:32px;cursor:pointer}
+#phone-book-shell button:disabled{opacity:.35}
+#phone-book-shell button:focus-visible{outline:2px solid #ffe6a3;outline-offset:1px}
+.phone-main{position:relative;min-width:0;min-height:0}
+#phone-art{position:absolute;inset:0}
+#phone-art{min-width:0;min-height:0}
+.phone-prose{position:fixed;min-width:0;min-height:0;padding:0;background:#0a1d2bf2;border:1px solid #b4c6c044;border-radius:12px;text-shadow:0 1px 3px #00131d;pointer-events:auto}
+.phone-prose[hidden]{display:none}
+.phone-prose[aria-hidden="true"]{visibility:hidden;pointer-events:none}
+.phone-reading-tools{display:flex;align-items:center;justify-content:center;gap:10px;min-width:0}
+#phone-number{white-space:nowrap}
+#phone-read{white-space:nowrap}
+#phone-text{margin:0;height:100%;max-height:100%;padding:10px 14px;background:transparent;border-radius:12px;overflow:hidden;white-space:pre-wrap;overflow-wrap:anywhere;font-size:15px;line-height:1.65;letter-spacing:.02em}
+#phone-book-shell.large-text #phone-text{font-size:18px}
+.phone-head{position:absolute;z-index:2;left:env(safe-area-inset-left);right:env(safe-area-inset-right);top:env(safe-area-inset-top);height:34px}
+.phone-foot{position:absolute;z-index:2;left:env(safe-area-inset-left);right:env(safe-area-inset-right);bottom:env(safe-area-inset-bottom);height:38px;font:13px sans-serif;background:linear-gradient(#10263000,#102630bb)}
+#phone-settings{position:absolute;z-index:5;right:max(8px,env(safe-area-inset-right));top:34px;bottom:42px;width:min(310px,90%);padding:10px;background:#142e3a;border:1px solid #9ba9a3;overflow:auto;pointer-events:auto;display:flex;flex-wrap:wrap;align-content:start;gap:8px}
+#phone-settings[hidden]{display:none}
+html[data-phone-landscape] #app{min-height:0!important;height:900px!important;overflow:hidden!important}
+html[data-phone-landscape] #app .topbar,html[data-phone-landscape] #app .footer{display:none!important}
+/* Keep the original copy measurable, but draw readable text in the parent. */
+html[data-phone-landscape] #app .copy{visibility:hidden!important;pointer-events:none!important}
+html[data-phone-landscape] #app .stage{position:absolute!important;inset:0!important;margin:0!important;padding:0!important;min-height:0!important;height:900px!important;width:1600px!important}
+html[data-phone-landscape] #app .book{width:100%!important;height:100%!important;min-height:0!important}
+
+/* Extend only the existing background behind the contained, uncut illustration.
+   The panorama has no characters or narration and receives no pointer input. */
+#phone-backdrop{position:fixed;inset:-14px;z-index:0;background-color:#102630;background-position:center;background-size:cover;filter:blur(9px) brightness(.76);pointer-events:none}
+#phone-backdrop[hidden]{display:none!important}
